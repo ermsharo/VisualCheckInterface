@@ -2,13 +2,18 @@ body {
   margin: 20px;
 }
 
+
+
 #domEl {
+  height: 75vw;
+  width: 46.5vw;
   /* position: relative;
   height: 230px;
   width: 500px;
   padding: 20px;
   background: #fff4f4;
   border: 1px solid #ddd; */
+
  
 
 }
