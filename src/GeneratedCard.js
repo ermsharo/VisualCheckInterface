@@ -1,15 +1,10 @@
 import React, { useRef } from 'react';
-import sample from './images/sample.png';
-import pattern from './images/pattern.png'
 import "./cardStyle.css"
 import * as htmlToImage from 'html-to-image';
 import styled from 'styled-components'
+import { getCardInfoById } from './utils/cardInfo';
 
-const Teste = styled.div`
-padding: 20px;
-font-family: 'Courier New', Courier, monospace;
-background-image: url("https://php-noise.com/images/noise_r155-g104-b233-t50-tS7-bW0-mB-mu0.4-st5_53b88b15060f41621edd48c03cba940f.png");
-`
+
 
 const CardName = styled.div`
 
@@ -69,7 +64,7 @@ padding: 2%;
 
 const DescriptionText = styled.div`
 padding: 2%;
-font-size: calc(46vw * 0.03);
+font-size: calc(46vw * 0.026);
 font-family: 'Merriweather', serif;
 
 `
@@ -81,14 +76,14 @@ font-size: calc(46vw * 0.03);
 `
 
 const CardAtributes = styled.div`
-padding: 0.5%;
-font-size: calc(46vw * 0.04);
+padding: 0.4%;
+font-size: calc(46vw * 0.031);
 text-align: right;
 
 `
 
 
-function App({ card_id }) {
+function GeneratedCard({ cardId }) {
 
     const domEl = useRef(null);
 
@@ -97,10 +92,14 @@ function App({ card_id }) {
 
         // download image
         const link = document.createElement('a');
-        link.download = "html-to-img.png";
+        link.download = `${cardId}.png`;
         link.href = dataUrl;
         link.click();
     }
+
+    const cardInfo =  getCardInfoById(cardId);
+    console.log("get card by id ",getCardInfoById(cardId))
+    
 
     return (
         <div className="App">
@@ -108,28 +107,23 @@ function App({ card_id }) {
 
             <div id='domEl' ref={domEl}>
                 <div class="card" >
-                    <CardStruct><CardName><div>A Cat of Ill Omen</div></CardName>
+                    <CardStruct><CardName><div>{cardInfo.Name}</div></CardName>
 
-                        <CardImage><img src="https://raw.githubusercontent.com/ermsharo/reference-images-repo/main/references-yu/DalleMiniById/12538374/this.png" /></CardImage>
-                        {/* <div class="image"> <img alt="cardimage " id="imgStuct" src={sample} /></div> */}
+                        <CardImage><img alt = {cardInfo.name} src={cardInfo.image} /></CardImage>
                         <Description>
 
                             <DescriptionText >
                                 <div>
-                                    <DescriptionType>   <strong>[ Spell Card ]</strong></DescriptionType>
+                                    <DescriptionType>   <strong>[ {cardInfo.Type} ]</strong></DescriptionType>
 
 
                                 </div>
                                 <div>
-                                    While this card is equipped to a monster: You can add 1 Level 5 or lower FIRE Warrior monster from your
-                                    Deck to your hand, then destroy this card. If this card is sent to the GY because the equipped monster
-                                    is sent to the GY: You can target 1 Level 5 or lower FIRE Warrior monster in your GY; Special Summon it,
-                                    also you cannot Special Summon monsters for the rest of the turn, except Warrior monsters. You can only
-                                    use 1 ""Infernoble Arms - Durendal"" effect per turn, and only once that turn.
+                                    {cardInfo.Description}
 
                                 </div>
                             </DescriptionText>
-                            <CardAtributes> <strong>Atk:500/Def:1500</strong></CardAtributes>
+                            <CardAtributes> <strong>Atk:{cardInfo.atk}/Def:{cardInfo.def}</strong></CardAtributes>
 
                         </Description>
 
@@ -144,4 +138,4 @@ function App({ card_id }) {
     );
 }
 
-export default App;
+export default GeneratedCard;

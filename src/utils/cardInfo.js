@@ -436,7 +436,9 @@ let CardInfo = [
 ]
 
 
-export const getCardInfoById = (cardId) => {
+export const getCardInfoById = ( cardId ) => {
+
+    // "https://raw.githubusercontent.com/ermsharo/reference-images-repo/main/references-yu/DalleMiniById/12538374/this.png"
 
     for (let i = 0; i < CardInfo.length; i++) {
         if (CardInfo[i].ID == cardId) {
@@ -446,8 +448,8 @@ export const getCardInfoById = (cardId) => {
                 "Type": CardInfo[i].Type,
                 "Description": CardInfo[i].Description,
                 "type": CardInfo[i].type,
-                "image": CardInfo[i].image,
-                "image_small":CardInfo[i].image_small,
+                "image": `https://raw.githubusercontent.com/ermsharo/reference-images-repo/main/references-yu/DalleMiniById/${cardId}/this.png`,
+                "image_small": CardInfo[i].image_small,
                 "atk": CardInfo[i].atk,
                 "def": CardInfo[i].def,
                 "level": CardInfo[i].level,
@@ -456,4 +458,17 @@ export const getCardInfoById = (cardId) => {
             }
         }
     }
+}
+
+
+export const getListOfIds = () => {
+
+    // "https://raw.githubusercontent.com/ermsharo/reference-images-repo/main/references-yu/DalleMiniById/12538374/this.png"
+
+    let cardIds = []; 
+    for (let i = 0; i < CardInfo.length; i++) {
+       cardIds.push(CardInfo[i].ID)
+    }
+
+    return cardIds; 
 }
