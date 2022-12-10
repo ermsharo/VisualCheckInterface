@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef,useState ,useEffect } from 'react';
 import "./cardStyle.css"
 import * as htmlToImage from 'html-to-image';
 import styled from 'styled-components'
@@ -12,7 +12,7 @@ background-color: white;
 color: black;
 font-family: 'Yeseva One', cursive;
 font-weight: bold;
-font-size: calc(46vw * 0.05);
+font-size: calc(46vw * 0.035);
 line-height:  calc(46vw * 0.1);
 text-align: center;
 border-radius: 15px;
@@ -21,7 +21,7 @@ justify-content: center;
 flex-direction: column;
 border: calc(46vw * 0.01) solid black;
 margin-bottom: calc(46vw * 0.02);
-
+text-overflow: ellipsis;
 
 background-color: #d3c390;
 background-image: url("https://i.ibb.co/HYYS0fF/noise-hex-d3c390-t50-t-S7-b-W0-m-B-mu1-5-st5-7064a5e0643fb4eb360f3e1edcb15ed9.png");
@@ -60,12 +60,19 @@ background-image: url("https://i.postimg.cc/Prwt8nTK/noise-hex-d7d4ca-t50-t-S7-b
 
 border-radius: 0px 0px 10px 10px;
 padding: 2%;
+max-height: calc(46vw * 0.535);
+min-height: calc(46vw * 0.535);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+text-overflow: ellipsis;
 `
 
 const DescriptionText = styled.div`
 padding: 2%;
-font-size: calc(46vw * 0.026);
+font-size: calc(46vw * 0.027);
 font-family: 'Merriweather', serif;
+text-overflow: ellipsis;
 
 `
 
@@ -76,14 +83,23 @@ font-size: calc(46vw * 0.03);
 `
 
 const CardAtributes = styled.div`
-padding: 0.4%;
+padding: 0.6%;
 font-size: calc(46vw * 0.031);
 text-align: right;
 
 `
 
 
-function GeneratedCard({ cardId }) {
+function GeneratedCard({ cardId , count}) {
+
+    useEffect(
+        () => {
+        console.log("count from here", count)
+        downloadImage();
+        },
+        [count]
+    );
+
 
     const domEl = useRef(null);
 
